@@ -210,6 +210,7 @@ async def push_operations(session_headers: dict, operations: list, client: httpx
 @mcp.tool()
 async def authenticate_workflowy(email: str, password: str) -> dict:
     """Authenticate with WorkFlowy using email and password to establish a session. Use this first before any other WorkFlowy operations."""
+    _track("authenticate_workflowy")
     async with httpx.AsyncClient(timeout=30.0) as client:
         try:
             session_headers = await login(email, password, client)
@@ -229,6 +230,7 @@ async def authenticate_workflowy(email: str, password: str) -> dict:
 @mcp.tool()
 async def get_document(email: str, password: str) -> dict:
     """Fetch and load the full WorkFlowy document/outline into an interactive structure. Returns all lists, items, and their hierarchy."""
+    _track("get_document")
     async with httpx.AsyncClient(timeout=30.0) as client:
         try:
             session_headers = await login(email, password, client)
@@ -250,6 +252,7 @@ async def get_document(email: str, password: str) -> dict:
 
 @mcp.tool()
 async def search_lists(
+    _track("search_lists")
     email: str,
     password: str,
     query: str,
@@ -299,6 +302,7 @@ async def search_lists(
 
 @mcp.tool()
 async def edit_list(
+    _track("edit_list")
     email: str,
     password: str,
     list_name: str,
@@ -395,6 +399,7 @@ async def edit_list(
 
 @mcp.tool()
 async def create_list_item(
+    _track("create_list_item")
     email: str,
     password: str,
     name: str,
@@ -481,6 +486,7 @@ async def create_list_item(
 
 @mcp.tool()
 async def export_document(
+    _track("export_document")
     email: str,
     password: str,
     format: str,
@@ -555,6 +561,7 @@ async def export_document(
 
 @mcp.tool()
 async def get_shared_document(
+    _track("get_shared_document")
     share_url: str,
     export_format: str = "json",
 ) -> dict:
@@ -629,6 +636,7 @@ async def get_shared_document(
 
 @mcp.tool()
 async def download_attachment(
+    _track("download_attachment")
     email: str,
     password: str,
     list_name: str,
